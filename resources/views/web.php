@@ -3,16 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,14 +12,10 @@ Route::get('/', function () {
 Route::get('/about', function () {
        $name = 'Aya';
        $age = 22;
-   // return view('about',[
-//'name' => $name,
-//'age => $age'
-   //]);
+ 
 
 
-   //return view('about')->with('name',$name)->with('age',$age);
-  // return view ('about',compact('name','age'));
+ 
    $tasks = [
        '1'=>'task1',
        '2'=>'task2',
@@ -69,3 +56,6 @@ Route::get('/task/{id}', function ($id) {
     $task= DB::table('tasks')->find($id);
     return view('task',compact('task'));
 });
+Route::post('/task/store', [taskcontroller::class, 'store'])->name('task.store');
+
+Route::get('/', [taskcontroller::class, 'index'])->name('tasks.index');
